@@ -3,3 +3,10 @@ Django==5.0.4
 sqlparse==0.4.4
 psycopg2-binary==2.9.9
 python-dotenv==1.0.1
+
+# Добавляется через команду pip install "django-phonenumber-field[phonenumberslite]"
+django-phonenumber-field==7.3.0
+phonenumberslite==8.13.34
+
+# Нужен для корректной работы медиа файлов
+Pillow==10.3.0
