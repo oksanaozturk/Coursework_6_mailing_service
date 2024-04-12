@@ -11,10 +11,18 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+# Перед этим делаем импорт через командную строку pip install python-dotenv  и вносим в requirements.txt
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Настраиваем получение информации по переменным из файла .env
+# Эта команда загружает всё из файла .env
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -76,8 +84,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql_psycopg2",  # django.db.backends.postgresql /
+        # django.db.backends.postgresql_psycopg2
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        'HOST': os.getenv("POSTGRES_HOST"),  # Можно не писать, если стандартный localhost
+        'PORT': os.getenv("POSTGRES_PORT"),  # Можно не писать, если стандартный
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
     }
 }
 
