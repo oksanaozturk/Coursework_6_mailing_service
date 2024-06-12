@@ -10,3 +10,5 @@ phonenumberslite==8.13.34
 
 # Нужен для корректной работы медиа файлов
 Pillow==10.3.0
+
+django-apscheduler==0.6.2
