@@ -19,7 +19,7 @@ class Client(models.Model):
         verbose_name_plural = "Клиенты"
 
     def __str__(self):
-        return f"Клмент сервиса: {self.name}, email: {self.email}"
+        return f"Клиент сервиса: {self.name}, email: {self.email}"
 
 
 class Message(models.Model):
@@ -57,7 +57,7 @@ class Newsletter(models.Model):
                                on_delete=models.CASCADE)
     message = models.ForeignKey(Message, verbose_name="Сообщение рассылки", on_delete=models.CASCADE)
     date_start = models.DateTimeField(default=timezone.now, verbose_name="Дата начала")
-    date_next = models.DateTimeField(default=timezone.now, verbose_name="Дата следующей отправки")
+    date_send = models.DateTimeField(default=timezone.now, verbose_name="Дата следующей отправки")
     date_finish = models.DateTimeField(default=timezone.now, verbose_name="Дата окончания")
     periodicity = models.CharField(max_length=50, choices=CHOICES_PERIOD,
                                    verbose_name="Периодичность")
@@ -70,8 +70,7 @@ class Newsletter(models.Model):
         verbose_name_plural = "Рассылки"
 
     def __str__(self):
-        return (f" Рассылка {self.title}, дата начала: {self.date_start}, дата окончания: {self.date_finish}, "
-                f"периодичность: {self.periodicity} ")
+        return f"Рассылка {self.title}"
 
 
 class Log(models.Model):
