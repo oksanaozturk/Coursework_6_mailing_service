@@ -3,3 +3,8 @@ POSTGRES_USER=postgres
 POSTGRES_HOST=localhost  #127.0.0.1
 POSTGRES_PORT=5432
 POSTGRES_PASSWORD=133124Ds
+
+# Пишем нашу почту
+EMAIL_HOST_USER=
+# Пишем пароль для Приложения Яндекс, а не пароль входа на Почту
+EMAIL_HOST_PASSWORD=
