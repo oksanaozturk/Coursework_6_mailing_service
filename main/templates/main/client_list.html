@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load my_tags %}
+{% block content %}
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Сервис рассылок "Всегда в курсе"</h1>
+        <h2 class="fw-light">Раздел "Клиенты"</h2>
+        <p class="lead text-body-secondary">Сервис рассылок "Всегда в курсе" Ваш добрый помощник в работе.</p>
+        <a class="btn btn btn-outline-primary mt-4" href="{% url 'main:client_create' %}" role="button">Добавить Клиента</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for client in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">{{ client }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:client_detail' client.pk %}" class="text-black">Подробнее</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:client_update' client.pk %}" class="text-black">Редактирование</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:client_delete' client.pk %}" class="text-black">Удалить</a></button>
+                </div>
+                <small class="text-body-secondary px-3">Автор: {{ client.owner }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

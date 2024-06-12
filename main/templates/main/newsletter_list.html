@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load my_tags %}
+{% block content %}
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Сервис рассылок "Всегда в курсе"</h1>
+        <p class="lead text-body-secondary">Сервис рассылок "Всегда в курсе" Ваш добрый помощник в работе.</p>
+        <a class="btn btn btn-outline-primary mt-4" href="{% url 'main:newsletter_create' %}" role="button">Добавить Рассылку</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for newsletter in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">{{ newsletter }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:newsletter_detail' newsletter.pk %}" class="text-black">Подробнее</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:newsletter_update' newsletter.pk %}" class="text-black">Редактирование</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:newsletter_delete' newsletter.pk %}" class="text-black">Удалить</a></button>
+                </div>
+                <small class="text-body-secondary px-3">Автор: {{ newsletter.author }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
