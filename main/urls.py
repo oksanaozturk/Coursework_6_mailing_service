@@ -2,8 +2,9 @@ from django.urls import path
 
 from main.apps import MainConfig
 from main.views import NewsletterListView, NewsletterDetailView, NewsletterCreateView, NewsletterUpdateView, \
-    NewsletterDeleteView, MessageListView, MessageDetailView, MessageCreateView, MessageUpdateView, MessageDeleteView,\
-    ClientListView, ClientDetailView, ClientCreateView, ClientUpdateView, ClientDeleteView, IndexView, LogListView
+    NewsletterDeleteView, MessageListView, MessageDetailView, MessageCreateView, MessageUpdateView, MessageDeleteView, \
+    ClientListView, ClientDetailView, ClientCreateView, ClientUpdateView, ClientDeleteView, IndexView, LogListView, \
+    toggle_activity
 
 app_name = MainConfig.name
 
@@ -47,5 +48,7 @@ urlpatterns = [
 
     # Путь для вывода листа с Логами
     path('logs/', LogListView.as_view(), name='logs_list'),
+
+    path('activity/<int:pk>/', toggle_activity, name='toggle_activity'),
 
 ]

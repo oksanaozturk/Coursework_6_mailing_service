@@ -24,11 +24,25 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:newsletter_detail' newsletter.pk %}" class="text-black">Подробнее</a></button>
+                  {% if user == newsletter.author %}
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:newsletter_update' newsletter.pk %}" class="text-black">Редактирование</a></button>
+                  {% endif %}
+
+                  {% if user == newsletter.author %}
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:newsletter_delete' newsletter.pk %}" class="text-black">Удалить</a></button>
+                  {% endif %}
                 </div>
                 <small class="text-body-secondary px-3">Автор: {{ newsletter.author }}</small>
               </div>
+                  {% if user.is_authenticated %}
+                  {% if perms.main.set_is_active %}
+                  {% if newsletter.is_active %}
+                  <a href="{% url 'main:toggle_activity' newsletter.pk %}" class="double-border-button">Деактивировать</a>
+                  {% else%}
+                  <a href="{% url 'main:toggle_activity' newsletter.pk %}" class="double-border-button">Активировать</a>
+                  {% endif %}
+                  {% endif %}
+                  {% endif %}
             </div>
           </div>
         </div>

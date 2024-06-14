@@ -1,3 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
@@ -12,13 +15,13 @@ class NewsletterListView(ListView):
     model = Newsletter
 
 
-class NewsletterDetailView(DetailView):
+class NewsletterDetailView(LoginRequiredMixin, DetailView):
     """Класс для вывода страницы с одной рассылкой по pk"""
 
     model = Newsletter
 
 
-class NewsletterCreateView(CreateView):
+class NewsletterCreateView(LoginRequiredMixin, CreateView):
     """Класс для создания новой рассылки"""
 
     model = Newsletter
@@ -36,7 +39,7 @@ class NewsletterCreateView(CreateView):
         return super().form_valid(form)
 
 
-class NewsletterUpdateView(UpdateView):
+class NewsletterUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для редактирования рассылки"""
 
     model = Newsletter
@@ -46,8 +49,19 @@ class NewsletterUpdateView(UpdateView):
         """Метод для определения пути, куда будет совершен переход после редактирования рассылки"""
         return reverse("main:newsletter_detail", args=[self.get_object().pk])
 
+    def get_form_class(self):
+        """
+        Метод, который позволяет вывести Пользователю правильную форму для редактирования,
+        в зависимости от прав доступа Пользователя.
+        """
+        user = self.request.user
+        if user == self.object.author or self.request.user.is_superuser:
+            return NewsletterForm
 
-class NewsletterDeleteView(DeleteView):
+        raise PermissionDenied
+
+
+class NewsletterDeleteView(LoginRequiredMixin, DeleteView):
     """Класс для удаления рассылки"""
 
     model = Newsletter
@@ -60,13 +74,13 @@ class MessageListView(ListView):
     model = Message
 
 
-class MessageDetailView(DetailView):
+class MessageDetailView(LoginRequiredMixin, DetailView):
     """Класс для вывода страницы с одним сообщением по pk"""
 
     model = Message
 
 
-class MessageCreateView(CreateView):
+class MessageCreateView(LoginRequiredMixin, CreateView):
     """Класс для создания нового сообщения"""
 
     model = Message
@@ -84,7 +98,7 @@ class MessageCreateView(CreateView):
         return super().form_valid(form)
 
 
-class MessageUpdateView(UpdateView):
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для редактирования сообщения"""
 
     model = Message
@@ -95,7 +109,7 @@ class MessageUpdateView(UpdateView):
         return reverse("main:message_detail", args=[self.get_object().pk])
 
 
-class MessageDeleteView(DeleteView):
+class MessageDeleteView(LoginRequiredMixin, DeleteView):
     """Класс для удаления сообщения"""
 
     model = Message
@@ -108,13 +122,13 @@ class ClientListView(ListView):
     model = Client
 
 
-class ClientDetailView(DetailView):
+class ClientDetailView(LoginRequiredMixin, DetailView):
     """Класс для вывода страницы с одним Клиентом по pk"""
 
     model = Client
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(LoginRequiredMixin, CreateView):
     """Класс для создания нового Клиент"""
 
     model = Client
@@ -132,7 +146,7 @@ class ClientCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для редактирования Клиента"""
 
     model = Client
@@ -143,7 +157,7 @@ class ClientUpdateView(UpdateView):
         return reverse("main:client_detail", args=[self.get_object().pk])
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
     """Класс для удаления Клиента"""
 
     model = Client
@@ -179,3 +193,18 @@ class LogListView(ListView):
     Класс для отображения всех созданных Логов.
     """
     model = Log
+
+
+def toggle_activity(request, pk):
+    """
+    Функция для Модератора по смене активности рассылки.
+    """
+    newsletter_status = get_object_or_404(Newsletter, pk=pk)
+    if newsletter_status.is_active is True:
+        newsletter_status.is_active = False
+
+    elif newsletter_status.is_active is False:
+        newsletter_status.is_active = True
+
+    newsletter_status.save()
+    return redirect(reverse('main:newsletter_list'))
