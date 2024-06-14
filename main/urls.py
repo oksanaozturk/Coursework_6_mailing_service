@@ -1,26 +1,13 @@
 from django.urls import path
 
 from main.apps import MainConfig
-from main.views import (
-    NewsletterListView,
-    NewsletterDetailView,
-    NewsletterCreateView,
-    NewsletterUpdateView,
-    NewsletterDeleteView,
-    MessageListView,
-    MessageDetailView,
-    MessageCreateView,
-    MessageUpdateView,
-    MessageDeleteView,
-    ClientListView,
-    ClientDetailView,
-    ClientCreateView,
-    ClientUpdateView,
-    ClientDeleteView,
-    IndexView,
-    LogListView,
-    toggle_activity,
-)
+from main.views import (ClientCreateView, ClientDeleteView, ClientDetailView,
+                        ClientListView, ClientUpdateView, IndexView,
+                        LogListView, MessageCreateView, MessageDeleteView,
+                        MessageDetailView, MessageListView, MessageUpdateView,
+                        NewsletterCreateView, NewsletterDeleteView,
+                        NewsletterDetailView, NewsletterListView,
+                        NewsletterUpdateView, toggle_activity)
 
 app_name = MainConfig.name
 

@@ -1,6 +1,6 @@
-from django.forms import ModelForm, BooleanField, DateTimeInput
+from django.forms import BooleanField, DateTimeInput, ModelForm
 
-from main.models import Newsletter, Message, Client
+from main.models import Client, Message, Newsletter
 
 
 # Данный класс создаем для стилизации форм, Это Mixin, класс ни от чего не наследуется

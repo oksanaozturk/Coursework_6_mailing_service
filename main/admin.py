@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main.models import Client, Newsletter, Message, Log
+from main.models import Client, Log, Message, Newsletter
 
 
 @admin.register(Client)

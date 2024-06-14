@@ -1,19 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy, reverse
-from django.views.generic import (
-    ListView,
-    DetailView,
-    CreateView,
-    UpdateView,
-    DeleteView,
-    TemplateView,
-)
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  TemplateView, UpdateView)
 
 from blog.models import Blog
-from main.forms import NewsletterForm, MessageForm, ClientForm
-from main.models import Newsletter, Message, Client, Log
+from main.forms import ClientForm, MessageForm, NewsletterForm
+from main.models import Client, Log, Message, Newsletter
 
 
 class NewsletterListView(ListView):

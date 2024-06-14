@@ -3,10 +3,9 @@ from datetime import datetime, timedelta
 
 import pytz
 from django.conf import settings
-from django.core.cache import cache
 from django.core.mail import send_mail
 
-from main.models import Newsletter, Log
+from main.models import Log, Newsletter
 
 
 def change_newsletter_status(newsletter, current_datetime) -> None:

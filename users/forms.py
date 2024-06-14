@@ -1,9 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import (
-    PasswordChangeForm,
-    UserChangeForm,
-    UserCreationForm,
-)
+from django.contrib.auth.forms import (PasswordChangeForm, UserChangeForm,
+                                       UserCreationForm)
 
 from main.forms import StyleFormMixin
 from users.models import User
