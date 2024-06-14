@@ -54,7 +54,7 @@ class Newsletter(models.Model):
 
     title = models.CharField(max_length=200, verbose_name=" Название рассылки", help_text="Напишите название рассылки")
     author = models.ForeignKey(User, verbose_name="Автор рассылки", related_name="newsletters",
-                               on_delete=models.CASCADE)
+                               on_delete=models.CASCADE, **NULLABLE)
     message = models.ForeignKey(Message, verbose_name="Сообщение рассылки", on_delete=models.CASCADE)
     datetime_start = models.DateTimeField(default=timezone.now, verbose_name="Дата начала рассылки")
     datetime_send = models.DateTimeField(default=timezone.now, verbose_name="Дата отправки")
