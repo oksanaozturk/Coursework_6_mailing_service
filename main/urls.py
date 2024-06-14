@@ -2,12 +2,16 @@ from django.urls import path
 
 from main.apps import MainConfig
 from main.views import NewsletterListView, NewsletterDetailView, NewsletterCreateView, NewsletterUpdateView, \
-    NewsletterDeleteView, MessageListView, MessageDetailView, MessageCreateView, MessageUpdateView, MessageDeleteView, \
-    ClientListView, ClientDetailView, ClientCreateView, ClientUpdateView, ClientDeleteView
+    NewsletterDeleteView, MessageListView, MessageDetailView, MessageCreateView, MessageUpdateView, MessageDeleteView,\
+    ClientListView, ClientDetailView, ClientCreateView, ClientUpdateView, ClientDeleteView, IndexView, LogListView
 
 app_name = MainConfig.name
 
 urlpatterns = [
+
+    # Путь для отображения главной страницы
+    path('', IndexView.as_view(), name='index'),
+
     # Путь для вывода листа со всеми рассылками
     path('newsletters/', NewsletterListView.as_view(), name='newsletter_list'),
     # Путь для вывода листа с одной рассылкой
@@ -40,5 +44,8 @@ urlpatterns = [
     path('clients/<int:pk>/update/', ClientUpdateView.as_view(), name='client_update'),
     # Путь для удаления Клиента
     path('clients/<int:pk>/delete/', ClientDeleteView.as_view(), name='client_delete'),
+
+    # Путь для вывода листа с Логами
+    path('logs/', LogListView.as_view(), name='logs_list'),
 
 ]
