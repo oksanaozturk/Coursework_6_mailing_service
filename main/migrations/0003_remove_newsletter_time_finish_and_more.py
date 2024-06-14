@@ -7,31 +7,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0002_remove_newsletter_date_finish_and_more'),
+        ("main", "0002_remove_newsletter_date_finish_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='newsletter',
-            name='time_finish',
+            model_name="newsletter",
+            name="time_finish",
         ),
         migrations.RemoveField(
-            model_name='newsletter',
-            name='time_start',
+            model_name="newsletter",
+            name="time_start",
         ),
         migrations.AddField(
-            model_name='newsletter',
-            name='date_finish',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Дата окончания'),
+            model_name="newsletter",
+            name="date_finish",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="Дата окончания"
+            ),
         ),
         migrations.AddField(
-            model_name='newsletter',
-            name='date_start',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Дата начала'),
+            model_name="newsletter",
+            name="date_start",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="Дата начала"
+            ),
         ),
         migrations.AlterField(
-            model_name='newsletter',
-            name='date_send',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Дата следующей отправки'),
+            model_name="newsletter",
+            name="date_send",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now,
+                verbose_name="Дата следующей отправки",
+            ),
         ),
     ]

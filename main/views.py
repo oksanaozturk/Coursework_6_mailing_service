@@ -2,7 +2,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    TemplateView,
+)
 
 from blog.models import Blog
 from main.forms import NewsletterForm, MessageForm, ClientForm
@@ -168,7 +175,8 @@ class IndexView(TemplateView):
     """
     Класс для отображения главной страницы с показателями статистики по сайту.
     """
-    template_name = 'main/index.html'
+
+    template_name = "main/index.html"
 
     def get_context_data(self, **kwargs):
         """
@@ -176,15 +184,15 @@ class IndexView(TemplateView):
         """
         context = super().get_context_data(**kwargs)
         article_list = Blog.objects.all()[:3]
-        context['article_list'] = article_list
+        context["article_list"] = article_list
         newsletter_count = Newsletter.objects.all().count()
-        context['newsletter_count'] = newsletter_count
+        context["newsletter_count"] = newsletter_count
 
-        unique_clients_count = Client.objects.all().values('email').distinct().count()
-        context['unique_clients_count'] = unique_clients_count
+        unique_clients_count = Client.objects.all().values("email").distinct().count()
+        context["unique_clients_count"] = unique_clients_count
 
         active_newsletter_count = Newsletter.objects.filter(is_active=True).count()
-        context['active_newsletter_count'] = active_newsletter_count
+        context["active_newsletter_count"] = active_newsletter_count
         return context
 
 
@@ -192,6 +200,7 @@ class LogListView(ListView):
     """
     Класс для отображения всех созданных Логов.
     """
+
     model = Log
 
 
@@ -207,4 +216,4 @@ def toggle_activity(request, pk):
         newsletter_status.is_active = True
 
     newsletter_status.save()
-    return redirect(reverse('main:newsletter_list'))
+    return redirect(reverse("main:newsletter_list"))

@@ -50,7 +50,9 @@ class User(AbstractUser):
         verbose_name = "Пользоаптель"
         verbose_name_plural = "Пользователи"
         # Добавление кастомных команд доступа
-        permissions = [("set_is_active", "Может блокировать пользователя"),]
+        permissions = [
+            ("set_is_active", "Может блокировать пользователя"),
+        ]
 
     def __str__(self):
         return self.email

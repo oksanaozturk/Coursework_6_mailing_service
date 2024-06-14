@@ -24,11 +24,15 @@ class NewsletterForm(StyleFormMixin, ModelForm):
 
     class Meta:
         model = Newsletter
-        exclude = ('datetime_send', 'author')
+        exclude = ("datetime_send", "author")
 
         widgets = {
-            'datetime_start': DateTimeInput(attrs={'placeholder': 'ДД.ММ.ГГГГ ЧЧ:ММ:СС', 'type': 'datetime-local'}),
-            'datetime_finish': DateTimeInput(attrs={'placeholder': 'ДД.ММ.ГГГГ ЧЧ:ММ:СС', 'type': 'datetime-local'}),
+            "datetime_start": DateTimeInput(
+                attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ:ММ:СС", "type": "datetime-local"}
+            ),
+            "datetime_finish": DateTimeInput(
+                attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ:ММ:СС", "type": "datetime-local"}
+            ),
         }
 
 

@@ -16,8 +16,16 @@ class ClientAdmin(admin.ModelAdmin):
 class NewsletterAdmin(admin.ModelAdmin):
     """Класс для регистрации модели Рассылки в админке."""
 
-    list_display = ("title", "author", "datetime_start", "datetime_send",
-                    "datetime_finish", "periodicity", "status", "is_active")
+    list_display = (
+        "title",
+        "author",
+        "datetime_start",
+        "datetime_send",
+        "datetime_finish",
+        "periodicity",
+        "status",
+        "is_active",
+    )
     list_filter = ("title",)
     search_fields = ("title", "author")
 

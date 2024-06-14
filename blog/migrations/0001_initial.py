@@ -7,24 +7,63 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Blog',
+            name="Blog",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Введите название статьи', max_length=150, verbose_name='Заголовок')),
-                ('content', models.TextField(blank=True, help_text='Добавьте содержимое', null=True, verbose_name='Содержимое')),
-                ('preview', models.ImageField(blank=True, help_text='Добавьте изображение', null=True, upload_to='blog_foto', verbose_name='Изображение')),
-                ('date_published', models.DateField(auto_now_add=True, verbose_name='Дата публикации')),
-                ('view_counter', models.PositiveIntegerField(default=0, verbose_name='Количество просмотров')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(
+                        help_text="Введите название статьи",
+                        max_length=150,
+                        verbose_name="Заголовок",
+                    ),
+                ),
+                (
+                    "content",
+                    models.TextField(
+                        blank=True,
+                        help_text="Добавьте содержимое",
+                        null=True,
+                        verbose_name="Содержимое",
+                    ),
+                ),
+                (
+                    "preview",
+                    models.ImageField(
+                        blank=True,
+                        help_text="Добавьте изображение",
+                        null=True,
+                        upload_to="blog_foto",
+                        verbose_name="Изображение",
+                    ),
+                ),
+                (
+                    "date_published",
+                    models.DateField(auto_now_add=True, verbose_name="Дата публикации"),
+                ),
+                (
+                    "view_counter",
+                    models.PositiveIntegerField(
+                        default=0, verbose_name="Количество просмотров"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Публикация',
-                'verbose_name_plural': 'Публикации',
-                'ordering': ('title', 'date_published', 'view_counter'),
+                "verbose_name": "Публикация",
+                "verbose_name_plural": "Публикации",
+                "ordering": ("title", "date_published", "view_counter"),
             },
         ),
     ]

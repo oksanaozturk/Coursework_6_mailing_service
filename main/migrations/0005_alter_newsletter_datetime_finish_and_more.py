@@ -7,23 +7,30 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0004_rename_date_finish_newsletter_datetime_finish_and_more'),
+        ("main", "0004_rename_date_finish_newsletter_datetime_finish_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='newsletter',
-            name='datetime_finish',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Дата окончания рассылки'),
+            model_name="newsletter",
+            name="datetime_finish",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now,
+                verbose_name="Дата окончания рассылки",
+            ),
         ),
         migrations.AlterField(
-            model_name='newsletter',
-            name='datetime_send',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Дата отправки'),
+            model_name="newsletter",
+            name="datetime_send",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="Дата отправки"
+            ),
         ),
         migrations.AlterField(
-            model_name='newsletter',
-            name='datetime_start',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Дата начала рассылки'),
+            model_name="newsletter",
+            name="datetime_start",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="Дата начала рассылки"
+            ),
         ),
     ]

@@ -16,15 +16,18 @@ def change_newsletter_status(newsletter, current_datetime) -> None:
     Она проверяет статус рассылки и при необходимости, когда статус рассылки="завершен", меняет актуальности с
     is_active=True на is_active=False
     """
-    if newsletter.status == 'created':
-        newsletter.status = 'launched'
-        print(f'{newsletter.title} launched')
-    elif newsletter.status == 'launched':
-        print(f'{newsletter.title}launched')
-    elif newsletter.status == 'launched' and newsletter.datetime_finish <= current_datetime:
-        newsletter.status = 'completed'
+    if newsletter.status == "created":
+        newsletter.status = "launched"
+        print(f"{newsletter.title} launched")
+    elif newsletter.status == "launched":
+        print(f"{newsletter.title}launched")
+    elif (
+        newsletter.status == "launched"
+        and newsletter.datetime_finish <= current_datetime
+    ):
+        newsletter.status = "completed"
         newsletter.is_active = False
-        print(f'{newsletter.title}completed')
+        print(f"{newsletter.title}completed")
     newsletter.save()
 
 
@@ -33,11 +36,11 @@ def get_date_send(newsletter, current_datetime):
     Функция корректировки  даты и временм для следующей отправки рассылки (datetime_send).
     """
     if newsletter.datetime_send < current_datetime:
-        if newsletter.periodicity == 'daily':
+        if newsletter.periodicity == "daily":
             newsletter.datetime_send += timedelta(days=1, hours=0, minutes=0)
-        elif newsletter.periodicity == 'weekly':
+        elif newsletter.periodicity == "weekly":
             newsletter.datetime_send += timedelta(days=7, hours=0, minutes=0)
-        elif newsletter.periodicity == 'monthly':
+        elif newsletter.periodicity == "monthly":
             newsletter.datetime_send += timedelta(days=30, hours=0, minutes=0)
         newsletter.save()
 
@@ -56,7 +59,11 @@ def send_mail_by_time():
     if newsletter_list:
         for newsletter in newsletter_list:
             change_newsletter_status(newsletter, current_datetime)
-            if newsletter.datetime_send <= current_datetime <= newsletter.datetime_finish:
+            if (
+                newsletter.datetime_send
+                <= current_datetime
+                <= newsletter.datetime_finish
+            ):
                 emails_list = [client.email for client in newsletter.clients.all()]
 
                 try:
@@ -67,19 +74,27 @@ def send_mail_by_time():
                         recipient_list=emails_list,
                         fail_silently=False,
                     )
-                    print('Письмо отправлено')
+                    print("Письмо отправлено")
                     status = "Отправлено"
-                    log = Log(newsletter=newsletter, status=status, server_response=server_response)
+                    log = Log(
+                        newsletter=newsletter,
+                        status=status,
+                        server_response=server_response,
+                    )
                     log.save()
-                    print('log сохранен')
+                    print("log сохранен")
                     get_date_send(newsletter, current_datetime)
 
                 except smtplib.SMTPException as error:
                     status = "Не отправлено"
                     server_response = f"Ошибка отправки {error}"
-                    log = Log(newsletter=newsletter, status=status, server_response=server_response)
+                    log = Log(
+                        newsletter=newsletter,
+                        status=status,
+                        server_response=server_response,
+                    )
                     log.save()
-                    print('Лог с ошибкой отправки', error)
+                    print("Лог с ошибкой отправки", error)
 
     else:
-        print('Нет newsletter_list')
+        print("Нет newsletter_list")

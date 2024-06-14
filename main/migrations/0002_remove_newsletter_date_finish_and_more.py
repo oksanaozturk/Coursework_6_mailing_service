@@ -7,35 +7,42 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0001_initial'),
+        ("main", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='newsletter',
-            name='date_finish',
+            model_name="newsletter",
+            name="date_finish",
         ),
         migrations.RemoveField(
-            model_name='newsletter',
-            name='date_next',
+            model_name="newsletter",
+            name="date_next",
         ),
         migrations.RemoveField(
-            model_name='newsletter',
-            name='date_start',
+            model_name="newsletter",
+            name="date_start",
         ),
         migrations.AddField(
-            model_name='newsletter',
-            name='date_send',
-            field=models.DateField(default=django.utils.timezone.now, verbose_name='Дата следующей отправки'),
+            model_name="newsletter",
+            name="date_send",
+            field=models.DateField(
+                default=django.utils.timezone.now,
+                verbose_name="Дата следующей отправки",
+            ),
         ),
         migrations.AddField(
-            model_name='newsletter',
-            name='time_finish',
-            field=models.TimeField(default=django.utils.timezone.now, verbose_name='Дата окончания'),
+            model_name="newsletter",
+            name="time_finish",
+            field=models.TimeField(
+                default=django.utils.timezone.now, verbose_name="Дата окончания"
+            ),
         ),
         migrations.AddField(
-            model_name='newsletter',
-            name='time_start',
-            field=models.TimeField(default=django.utils.timezone.now, verbose_name='Дата начала'),
+            model_name="newsletter",
+            name="time_start",
+            field=models.TimeField(
+                default=django.utils.timezone.now, verbose_name="Дата начала"
+            ),
         ),
     ]

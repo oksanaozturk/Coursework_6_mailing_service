@@ -66,9 +66,7 @@ class Command(BaseCommand):
             max_instances=1,
             replace_existing=True,
         )
-        logger.info(
-            "Added weekly job: 'delete_old_job_executions'."
-        )
+        logger.info("Added weekly job: 'delete_old_job_executions'.")
 
         try:
             logger.info("Starting scheduler...")

@@ -6,12 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0009_alter_message_options_alter_newsletter_options'),
+        ("main", "0009_alter_message_options_alter_newsletter_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='newsletter',
-            options={'permissions': [('set_is_active', 'Может менять активность рассылки')], 'verbose_name': 'Рассылка', 'verbose_name_plural': 'Рассылки'},
+            name="newsletter",
+            options={
+                "permissions": [("set_is_active", "Может менять активность рассылки")],
+                "verbose_name": "Рассылка",
+                "verbose_name_plural": "Рассылки",
+            },
         ),
     ]
