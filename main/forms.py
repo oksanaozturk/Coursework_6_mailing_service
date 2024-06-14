@@ -19,15 +19,15 @@ class StyleFormMixin:
                 field.widget.attrs["class"] = "form-control"
 
 
-class NewsletterForm(StyleFormMixin,ModelForm):
+class NewsletterForm(StyleFormMixin, ModelForm):
     """Класс создания форм для модели Newsletter"""
 
     class Meta:
         model = Newsletter
-        exclude = ("next_date", "is_active")
+        fields = "__all__"
 
 
-class MessageForm(StyleFormMixin,ModelForm):
+class MessageForm(StyleFormMixin, ModelForm):
     """Класс создания форм для модели Message"""
 
     class Meta:
@@ -35,7 +35,7 @@ class MessageForm(StyleFormMixin,ModelForm):
         fields = ("subject", "body", "author")
 
 
-class ClientForm(StyleFormMixin,ModelForm):
+class ClientForm(StyleFormMixin, ModelForm):
     """Класс создания форм для модели Client"""
 
     class Meta:
