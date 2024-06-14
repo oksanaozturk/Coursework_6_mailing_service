@@ -74,6 +74,15 @@ class MessageCreateView(CreateView):
 
     success_url = reverse_lazy("main:message_list")
 
+    def form_valid(self, form):
+        """
+        Метод для автоматического привязывания Пользователя к создаваемому Сообщению
+        """
+        self.object = form.save()
+        self.object.author = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 
 class MessageUpdateView(UpdateView):
     """Класс для редактирования сообщения"""
@@ -112,6 +121,15 @@ class ClientCreateView(CreateView):
     form_class = ClientForm
 
     success_url = reverse_lazy("main:client_list")
+
+    def form_valid(self, form):
+        """
+        Метод для автоматического привязывания Пользователя к создаваемому Клиенту
+        """
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class ClientUpdateView(UpdateView):
