@@ -12,7 +12,7 @@ class Client(models.Model):
     email = models.EmailField(verbose_name="email", help_text='Введите Вашу электронную почту')
     name = models.CharField(max_length=200, verbose_name='ФИО', help_text='Введите Ваши ФИО')
     comment = models.TextField(verbose_name='Комментарий', blank=True, null=True,)
-    owner = models.ForeignKey(User, verbose_name='Пользователь', related_name="clients", on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, verbose_name='Пользователь', related_name="clients", on_delete=models.CASCADE, **NULLABLE)
 
     class Meta:
         verbose_name = "Клиент"
@@ -27,7 +27,7 @@ class Message(models.Model):
 
     subject = models.CharField(max_length=200, verbose_name="тема письма", help_text="Укажите тему сообщения")
     body = models.TextField(verbose_name="Тело письма", help_text="Заполните тело сообщения")
-    author = models.ForeignKey(User, verbose_name="Автор", on_delete=models.CASCADE, related_name="messages")
+    author = models.ForeignKey(User, verbose_name="Автор", on_delete=models.CASCADE, related_name="messages", **NULLABLE)
 
     class Meta:
         verbose_name = "Сообщение"
