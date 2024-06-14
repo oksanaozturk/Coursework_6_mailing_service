@@ -23,9 +23,11 @@
               <p class="card-text">{{ client }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
+                  {% if user == message.owner %}
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:client_detail' client.pk %}" class="text-black">Подробнее</a></button>
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:client_update' client.pk %}" class="text-black">Редактирование</a></button>
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'main:client_delete' client.pk %}" class="text-black">Удалить</a></button>
+                  {% endif %}
                 </div>
                 <small class="text-body-secondary px-3">Автор: {{ client.owner }}</small>
               </div>
