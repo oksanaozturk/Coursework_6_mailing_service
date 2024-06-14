@@ -1,9 +1,9 @@
-from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
+from blog.models import Blog
 from main.forms import NewsletterForm, MessageForm, ClientForm
-from main.models import Newsletter, Message, Client
+from main.models import Newsletter, Message, Client, Log
 
 
 class NewsletterListView(ListView):
@@ -26,14 +26,14 @@ class NewsletterCreateView(CreateView):
 
     success_url = reverse_lazy("main:newsletter_list")
 
-    # def form_valid(self, form):
-    #     """Метод для автоматического привязывания Пользователя к создаваемой Рассылке"""
-    #     # Сохранение формы
-    #     self.object = form.save()
-    #     self.object.author = self.request.user
-    #     self.object.save()
-    #
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        """Метод для автоматического привязывания Пользователя к создаваемой Рассылке"""
+        # Сохранение формы
+        self.object = form.save()
+        self.object.author = self.request.user
+        self.object.save()
+
+        return super().form_valid(form)
 
 
 class NewsletterUpdateView(UpdateView):
@@ -130,3 +130,34 @@ class ClientDeleteView(DeleteView):
 
     model = Client
     success_url = reverse_lazy("main:client_list")
+
+
+class IndexView(TemplateView):
+    """
+    Класс для отображения главной страницы с показателями статистики по сайту.
+    """
+    template_name = 'main/index.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        Метод получения данных для отображения в виде статистики на Главной странице Проекта.
+        """
+        context = super().get_context_data(**kwargs)
+        article_list = Blog.objects.all()[:3]
+        context['article_list'] = article_list
+        newsletter_count = Newsletter.objects.all().count()
+        context['newsletter_count'] = newsletter_count
+
+        unique_clients_count = Client.objects.all().values('email').distinct().count()
+        context['unique_clients_count'] = unique_clients_count
+
+        active_newsletter_count = Newsletter.objects.filter(is_active=True).count()
+        context['active_newsletter_count'] = active_newsletter_count
+        return context
+
+
+class LogListView(ListView):
+    """
+    Класс для отображения всех созданных Логов.
+    """
+    model = Log
