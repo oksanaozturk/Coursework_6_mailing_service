@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-dark">Сервис рассылок</h1>
+            <h1 class="fw-dark">"Всегда в курсе"</h1>
+            <p class="lead text-body-secondary">Сервис рассылок "Всегда в курсе" - Ваш добрый помощник в работе.</p>
+            <h2>Статистика сервиса</h2>
+            <p class="lead">Количество рассылок всего: {{newsletter_count}}</p>
+            <p class="lead">Количество активных рассылок: {{active_newsletter_count}}</p>
+            <p class="lead">Количество уникальных клиентов: {{ unique_clients_count }}</p>
+        </div>
+    </div>
+    <h2 class="mb-4">Статьи блога</h2>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for object in article_list %}
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src="/media/{{ object.preview }}" alt="Product Image" class="Image fluid">
+                <div class="card-body">
+                    <h4>{{ object }}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                                href="{% url 'blog:view' object.slug %}" class="text-black">Подробнее</a></button>
+                        <small class="text-body-secondary"> {{ object.date_published }} </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
