@@ -83,27 +83,3 @@ def send_mail_by_time():
 
     else:
         print('Нет newsletter_list')
-
-
-# def get_cache_for_mailings():
-#     if settings.CACHE_ENABLED:
-#         mailings_count = Newsletter.objects.all().count()
-#     else:
-#         key = "mailings_count"
-#         mailings_count = cache.get(key)
-#         if mailings_count is None:
-#             mailings_count = Newsletter.objects.all().count()
-#             cache.set(key, mailings_count)
-#     return mailings_count
-#
-#
-# def get_cache_for_active_mailings():
-#     if settings.CACHE_ENABLED:
-#         active_mailings_count = Newsletter.objects.filter(is_active=True).count()
-#     else:
-#         key = "active_mailings_count"
-#         active_mailings_count = cache.get(key)
-#         if active_mailings_count is None:
-#             active_mailings_count = Newsletter.objects.filter(is_active=True).count()
-#             cache.set(key, active_mailings_count)
-#     return active_mailings_count
