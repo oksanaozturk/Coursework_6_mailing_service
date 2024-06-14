@@ -1,10 +1,12 @@
-POSTGRES_DB=mailing_service_1
-POSTGRES_USER=postgres
-POSTGRES_HOST=localhost  #127.0.0.1
-POSTGRES_PORT=5432
-POSTGRES_PASSWORD=133124Ds
+SECRET_KEY=
 
-# Пишем нашу почту
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_HOST=
+POSTGRES_PORT=
+POSTGRES_PASSWORD=
+
+# Напишите Вашу почту
 EMAIL_HOST_USER=
-# Пишем пароль для Приложения Яндекс, а не пароль входа на Почту
+# Напишите пароль для Приложения Яндекс, а не пароль входа на Почту
 EMAIL_HOST_PASSWORD=
