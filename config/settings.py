@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'users',
     'phonenumber_field',
     'main',
-    'django_apscheduler'
+    'blog',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -151,6 +152,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Добавляем настройки для работы Приложения User
 AUTH_USER_MODEL = "users.User"
 
+# Данная настройка требуется для работы кастомной команды create_superuser, чтобы при переходе на страницу
+# был переход к форме Входа
+LOGIN_REDIRECT_URL = "/"
+# Для Выхода, переадресует на Главную страницу
+LOGOUT_REDIRECT_URL = "/"
+
 # Настройки для отправки писем на почту сервиса Яндекс
 EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 465
@@ -162,5 +169,10 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
+# Дополнительные настройки для всех почтовых сервисов
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Настройкти для APSCHEDULER (отправка писем по времени)
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
