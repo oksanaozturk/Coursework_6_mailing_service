@@ -4,6 +4,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from pytils.translit import slugify
 
 from blog.models import Blog
+from blog.services import get_blogs_from_cache
 
 
 class BlogCreateView(CreateView):
@@ -27,6 +28,13 @@ class BlogListView(ListView):
     """Класс лоя просмотра всех публикаций."""
 
     model = Blog
+
+    def get_queryset(self):
+        """Переопределяем работу метода (он получает данные из БД), для функционирования кеша,
+        теперь она будет выводить данные, полученные при отработке функции get_blogs_from_cache."""
+
+        queryset = get_blogs_from_cache()
+        return queryset
 
 
 class BlogDetailView(DetailView):
