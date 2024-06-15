@@ -21,3 +21,5 @@ pytils==0.4.1
 flake8==7.0.0
 black==24.4.2
 isort==5.13.2
+
+redis==5.0.6
