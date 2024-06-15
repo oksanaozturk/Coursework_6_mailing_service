@@ -177,3 +177,23 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Настройкти для APSCHEDULER (отправка писем по времени)
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+# Флаг, который отвечает за глобальное состояние работоспособности кеша
+CACHE_ENABLED = True
+
+# "BACKEND": — бэкенд для обработки кеша и работы с хранилищем.
+# "LOCATION":  — месторасположение хранилища.
+# Если КЭШ работает, то
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",  # Прописываем путь до RedisCache
+            "LOCATION": os.getenv("REDIS_HOST"),  # Где лежит redis
+            # "LOCATION": "redis://127.0.0.1:6379",
+            # "TIMEOUT": 300  # Ручная регулировка времени жизни кеша в секундах, по умолчанию 300
+        }
+    }
+
+# Подключение к брокеру может быть закрыто авторизацией,
+# поэтому настройки могут меняться и строка Location может выглядеть следующим образом:
+# redis://username:password@127.0.0.1:6379
