@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from main.apps import MainConfig
 from main.views import (ClientCreateView, ClientDeleteView, ClientDetailView,
@@ -13,7 +14,7 @@ app_name = MainConfig.name
 
 urlpatterns = [
     # Путь для отображения главной страницы
-    path("", IndexView.as_view(), name="index"),
+    path("", cache_page(60)(IndexView.as_view()), name="index"),
     # Путь для вывода листа со всеми рассылками
     path("newsletters/", NewsletterListView.as_view(), name="newsletter_list"),
     # Путь для вывода листа с одной рассылкой
@@ -64,5 +65,6 @@ urlpatterns = [
     path("clients/<int:pk>/delete/", ClientDeleteView.as_view(), name="client_delete"),
     # Путь для вывода листа с Логами
     path("logs/", LogListView.as_view(), name="logs_list"),
+
     path("activity/<int:pk>/", toggle_activity, name="toggle_activity"),
 ]
