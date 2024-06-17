@@ -26,14 +26,11 @@ urlpatterns = [
     path("confirm-register/<str:token>/", confirm_email, name="confirm_email"),
     # Путь для редактирования профиля Пользователя
     path("profile/", UserUpdateView.as_view(), name="profile"),
-    # Путь для генерации нового пароля при Восстановлении пароля
-    # path("profile/genpassword/", generate_new_password, name="generate_new_password"),
-    # path("login/restore-password", restore_password, name="restore_password"),
     # Путь для обработки формы изменения пароля
     path(
         "password-change/", views.UserPasswordChange.as_view(), name="password-change"
     ),
-    # Путь для отображения результата успешной смены паролч
+    # Путь для отображения результата успешной смены пароля
     path(
         "password-change/done/",
         PasswordChangeDoneView.as_view(template_name="users/password_change_done.html"),
