@@ -41,7 +41,7 @@ class UserRegisterView(CreateView):
         # Данный сформировавнный link будет отправлен Пользователю. При его нажатии он попадет
         link = f"http://{host}/users/confirm-register/{token}"
         # Формируем отправление письма на почту
-        message = f"Вы успешно зарегистрировались на сайте 'Здоровье в ложке'. Предлагаем Вам подтвердить почту {link}"
+        message = f"Вы успешно зарегистрировались на сайте 'Всегда в курсе'. Предлагаем Вам подтвердить почту {link}"
         # Настраиваем отправление письма, копируем данню строку с сайта https://vivazzi.pro/ru/it/send-email-in-django/
         send_mail("Верификация почты", message, settings.EMAIL_HOST_USER, [user.email])
 
