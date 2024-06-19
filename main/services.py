@@ -79,6 +79,7 @@ def send_mail_by_time():
                         newsletter=newsletter,
                         status=status,
                         server_response=server_response,
+                        owner=newsletter.author
                     )
                     log.save()
                     print("log сохранен")
@@ -91,6 +92,7 @@ def send_mail_by_time():
                         newsletter=newsletter,
                         status=status,
                         server_response=server_response,
+                        owner=newsletter.author
                     )
                     log.save()
                     print("Лог с ошибкой отправки", error)
