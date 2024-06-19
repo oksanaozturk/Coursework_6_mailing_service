@@ -60,7 +60,6 @@ class Message(models.Model):
             ("set_update", "Может менять сообщения"),
         ]
 
-
     def __str__(self):
         return f"Тема: {self.subject}. содержание: {self.body}"
 
