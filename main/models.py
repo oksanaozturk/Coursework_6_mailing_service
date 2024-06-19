@@ -56,6 +56,10 @@ class Message(models.Model):
     class Meta:
         verbose_name = "Сообщение"
         verbose_name_plural = "Сообщения"
+        permissions = [
+            ("set_update", "Может менять сообщения"),
+        ]
+
 
     def __str__(self):
         return f"Тема: {self.subject}. содержание: {self.body}"
@@ -137,6 +141,8 @@ class Log(models.Model):
     )
     status = models.CharField(max_length=50, verbose_name="Статус попытки")
     server_response = models.TextField(verbose_name="Ответ сервера", **NULLABLE)
+
+    owner = models.ForeignKey(User, verbose_name="Владелец Логов", on_delete=models.CASCADE, **NULLABLE)
 
     class Meta:
         verbose_name = "Лог"
