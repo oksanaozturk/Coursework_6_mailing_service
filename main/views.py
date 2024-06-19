@@ -197,6 +197,17 @@ class LogListView(ListView):
 
     model = Log
 
+    def get_queryset(self, *args, **kwargs):
+        """
+        Метод для вывода листа с Логами только для Автора рассылок, при отправке которых эти Логи сформированы.
+        """
+        user = self.request.user
+        if user.is_staff or user.is_superuser:
+            queryset = super().get_queryset(*args, **kwargs)
+        else:
+            queryset = super().get_queryset().filter(owner=user)
+        return queryset
+
 
 def toggle_activity(request, pk):
     """
